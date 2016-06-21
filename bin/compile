@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+echo "-----> Found a .slugcleanup"
+
+cd $1
+
+cat .slugcleanup | xargs -I {} bash -c 'rm -rf {}'
+rm .slugcleanup
