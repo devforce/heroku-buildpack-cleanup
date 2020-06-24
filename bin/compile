@@ -4,5 +4,10 @@ echo "-----> Found a .slugcleanup"
 
 cd $1
 
-cat .slugcleanup | xargs -I {} bash -c 'rm -rf {}'
+for FILENAME in $(cat .slugcleanup | sed '/^$/d'); do
+  FILE_SIZE=$(du -sh ${FILENAME}  | cut -f1)
+  echo "Removing ${FILENAME}.  Size ${FILE_SIZE}"
+  rm -rf ${FILENAME}
+done
+
 rm .slugcleanup
